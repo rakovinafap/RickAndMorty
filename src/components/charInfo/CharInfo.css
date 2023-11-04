@@ -1,0 +1,28 @@
+.aboutchar {
+    text-align: center;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .aboutchar img {
+    border-radius: 50%;
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    margin-bottom: 20px;
+  }
+  
+  .aboutchar h2 {
+    margin-bottom: 10px;
+  }
+  
+  .aboutchar h4 {
+    margin-bottom: 50px;
+  }
+  
+  .aboutchar hr {
+    margin-bottom: 20px;
+  }
+  
+  

@@ -1,0 +1,15 @@
+
+.character-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.character-image {
+  width: 100px;
+}
+
+.character-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}

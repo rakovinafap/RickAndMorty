@@ -11,32 +11,33 @@ interface Character {
 
 const CharList: React.FC = () => {
   const [characters, setCharacters] = useState<Character[]>([]);
+  const [filterCharacters, setFilterCharacters] = useState<Character[]>([]);
   const [searchHero, setSearchHero] = useState('');
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
   const charListRef = useRef<HTMLDivElement>(null);
-  
+
   const lineHeight: any = document.documentElement.clientHeight;
 
-
-  
   useEffect(() => {
     const savedSearch = localStorage.getItem('searchResult');
     if (savedSearch) {
       setSearchHero(savedSearch);
+      fetchFilterCharacters(savedSearch);
+    } else {
+      fetchCharacters();
     }
-    fetchCharacters(); 
   }, []);
 
   const handleScroll = () => {
-   
     if (
       charListRef.current &&
       !loading &&
       charListRef.current.scrollHeight - charListRef.current.scrollTop <=
         charListRef.current.clientHeight + 200
     ) {
-      fetchCharacters(); 
+      fetchCharacters();
     }
   };
 
@@ -46,7 +47,6 @@ const CharList: React.FC = () => {
     }
 
     return () => {
-    
       if (charListRef.current) {
         charListRef.current.removeEventListener('scroll', handleScroll);
       }
@@ -58,41 +58,52 @@ const CharList: React.FC = () => {
     fetch(`https://rickandmortyapi.com/api/character/?page=${page}`)
       .then(response => response.json())
       .then(data => {
- 
         const charactersData: Character[] = data.results.map((char: any) => ({
           id: char.id,
           name: char.name,
           image: char.image,
           species: char.species,
         }));
-        
-
         setCharacters(prevCharacters => [...prevCharacters, ...charactersData]);
         setLoading(false);
-        setPage(page + 1); 
+        setPage(page + 1);
+        setIsDataLoaded(true);
       })
       .catch(error => {
         console.error('Ошибка при получении данных:', error);
         setLoading(false);
+        setIsDataLoaded(true);
       });
   };
 
-  
-   
-  const filteredCharacters = characters.filter(character =>
-    character.name.toLowerCase().includes(searchHero.toLowerCase())
-  );  
-  
- 
-  console.log("Filter" + filteredCharacters) 
-
-  
-  const setHeroAndLocal = (e: any) => {
-    const searchText = e.target.value;
-    setSearchHero(searchText);
-    localStorage.setItem('searchResult', searchText);
+  const fetchFilterCharacters = (name: string) => {
+    setLoading(true);
+    fetch(`https://rickandmortyapi.com/api/character/?name=${name}`)
+      .then(response => response.json())
+      .then(data => {
+        const charactersData: Character[] = data.results.map((char: any) => ({
+          id: char.id,
+          name: char.name,
+          image: char.image,
+          species: char.species,
+        }));
+        setFilterCharacters(charactersData);
+        setLoading(false);
+        setIsDataLoaded(true);
+      })
+      .catch(error => {
+        console.error('Ошибка при получении данных:', error);
+        setLoading(false);
+        setIsDataLoaded(true);
+      });
   };
 
+  const setHeroAndLocal = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const searchText = e.target.value;
+    setSearchHero(searchText);
+    fetchFilterCharacters(searchText);
+    localStorage.setItem('searchResult', searchText);
+  };
 
   return (
     <div className="character-grid" ref={charListRef} style={{ overflowY: 'scroll', height: `${lineHeight}px` }}>
@@ -100,16 +111,28 @@ const CharList: React.FC = () => {
         type="text"
         placeholder="Filter by name..."
         value={searchHero}
-        onChange={e => setHeroAndLocal(e)}
+        onChange={setHeroAndLocal}
       />
       <hr />
-      {filteredCharacters.map(character => (
-        <Link key={character.id} to={`/character/${character.id}`} className="character-card">
-          <img src={character.image} alt={character.name} className="character-image" />
-          <p>{character.name}</p>
-          <p>{character.species}</p>
-        
-        </Link>
+      {!isDataLoaded && <p>Loading...</p>}
+      {isDataLoaded && (searchHero ? (
+        filterCharacters.length === 0 ? <p>No matching characters</p> : (
+          filterCharacters.map(character => (
+            <Link key={character.id} to={`/character/${character.id}`} className="character-card">
+              <img src={character.image} alt={character.name} className="character-image" />
+              <p>{character.name}</p>
+              <p>{character.species}</p>
+            </Link>
+          ))
+        )
+      ) : (
+        characters.map(character => (
+          <Link key={character.id} to={`/character/${character.id}`} className="character-card">
+            <img src={character.image} alt={character.name} className="character-image" />
+            <p>{character.name}</p>
+            <p>{character.species}</p>
+          </Link>
+        ))
       ))}
       {loading && <p>Loading...</p>}
     </div>
@@ -117,3 +140,8 @@ const CharList: React.FC = () => {
 };
 
 export default CharList;
+
+//TO DO list: 
+// 1. Implement rendering of 8 characters each on list
+// 2. Add authorization with Google
+// 3. Styles

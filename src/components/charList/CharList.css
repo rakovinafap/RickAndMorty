@@ -1,15 +1,30 @@
+.character-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-bar {
+  margin: 50px;
+  max-width: 600px;
+  margin-bottom: 20px; 
+}
+
+.character-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 20px;
+  max-width: 100%;
+  margin-bottom: 200px;  /* Костыль на скролл */
+}
 
 .character-card {
   border: 1px solid #ccc;
   padding: 10px;
+  width: 200px;
 }
 
 .character-image {
-  width: 100px;
+  width: 100%;
 }
 
-.character-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getAuth, onAuthStateChanged, signInWithPopup, signOut, GoogleAuthProvider } from 'firebase/auth';
 import { initializeApp } from "firebase/app";
+import { Link, useLocation } from 'react-router-dom';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDCrwvufMxQz57HJfZS3JR7KR7bWtbO9qo",
@@ -17,6 +18,7 @@ const googleAuthProvider = new GoogleAuthProvider();
 
 const AuthProvider = () => {
     const [user, setUser] = useState(auth.currentUser);
+    console.log(user)
 
     useEffect(() => {
         const unSub = onAuthStateChanged(auth, (maybeUser) => {
@@ -40,19 +42,40 @@ const AuthProvider = () => {
             .catch(error => console.error('Error signing out:', error));
     };
 
+    const location = useLocation();
+
     return (
-        <div>
-            {user ? (
-               <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', padding: '10px' }}>
-                    {user.photoURL && <img src={user.photoURL} alt="User Profile" style={{ width: '50px', height: '50px', borderRadius: '50%', marginRight: '10px' }} />}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px' }}>
+
+                {location.pathname.includes('character') ? (
+                        <div>
+                        <Link to="/" style={{ display: 'block', textDecoration: 'none' }}>
+                            Go Back
+                        </Link>
+                        </div>
+                    ): (
+                        <p></p>
+                    )}
+
+                {user ? (
+                <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+                    {user.photoURL && (
+                    <img
+                        src={user.photoURL}
+                        alt="User Profile"
+                        style={{ width: '50px', height: '50px', borderRadius: '50%', marginRight: '10px' }}
+                    />
+                    )}
                     <span style={{ marginRight: '10px' }}>{user.displayName}</span>
                     <button onClick={handleSignOut}>Sign Out</button>
                 </div>
-            ) : (
-                <button onClick={handleSignIn}>Sign In with Google</button>
-            )}
-        </div>
-    );
+                ) : (
+                <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+                    <button onClick={handleSignIn}>Sign In with Google</button>
+                </div>
+                )}
+            </div>
+            );
 }
 
 export default AuthProvider;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+
 
 import "./CharInfo.css";
 
@@ -49,7 +49,6 @@ const CharInfo: React.FC = () => {
 
   return (
     <div>
-        <Link to="/">Go Back</Link>
       <div className="aboutchar">
           <img src={character.image} alt={character.name} />
           <h2>{character.name}</h2>

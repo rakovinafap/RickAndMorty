@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef, StrictMode } from 'react';
 import { Link } from 'react-router-dom';
 import './CharList.css';
+import logo from '../../assets/img/logo.png'; 
 
 interface Character {
   id: number;
@@ -8,7 +9,6 @@ interface Character {
   image: string;
   species: string;
 }
-
 
 
 const CharList: React.FC = () => {
@@ -20,7 +20,7 @@ const CharList: React.FC = () => {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const charListRef = useRef<HTMLDivElement>(null);
 
-  const lineHeight: any = document.documentElement.clientHeight;
+  /* const lineHeight: any = document.documentElement.clientHeight; */
 
   console.log(characters)
 
@@ -124,15 +124,17 @@ const CharList: React.FC = () => {
   };
 
   return (
-    <div className="character-grid" ref={charListRef}  style={{  width: "100%", /*  overflowY: 'scroll', */ /* height: `${lineHeight}px`  */}}>
+    <div className="character-grid" ref={charListRef} >
+       <img src={logo} alt="kek" style={{width: "600px", height: "130px"}}/>
       <div className="search-bar">
         <input
           type="text"
-          placeholder="Filter by name..."
+          placeholder=" Filter by name..."
           value={searchHero}
           onChange={setHeroAndLocal}
         />
         </div>
+       
       <div className="character-list" >
             {!isDataLoaded && <p>Loading...</p>}
             {isDataLoaded && (searchHero ? (
@@ -140,8 +142,10 @@ const CharList: React.FC = () => {
                 filterCharacters.map(character => (
                   <Link key={character.id} to={`/character/${character.id}`} className="character-card">
                     <img src={character.image} alt={character.name} className="character-image" />
-                    <p>{character.name}</p>
-                    <p>{character.species}</p>
+                      <div className="character-info">
+                          <b>{character.name}</b>
+                          <p>{character.species}</p>
+                      </div>
                   </Link>
                 ))
               )
@@ -149,8 +153,10 @@ const CharList: React.FC = () => {
               characters.map(character => (
                 <Link key={character.id} to={`/character/${character.id}`} className="character-card">
                   <img src={character.image} alt={character.name} className="character-image" />
-                  <p>{character.name}</p>
-                  <p>{character.species}</p>
+                  <div className="character-info">
+                        <b>{character.name}</b>
+                        <p>{character.species}</p>
+                    </div>
                 </Link>
               ))
             ))}

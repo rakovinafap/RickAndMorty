@@ -2,29 +2,74 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  
 }
 
 .search-bar {
   margin: 50px;
-  max-width: 600px;
   margin-bottom: 20px; 
+  width: 800px;
+ 
+}
+
+.search-bar input[type="text"] {
+  background-image: url('../../assets/img/lupe.png');
+}
+
+.search-bar input {
+  width: 100%;
+  height: 40px;
+  padding-left: 40px;
+  background-image: url('../../assets/img/lupe.png');
+  background-size: 20px 20px;
+  background-position: 10px center;
+  background-repeat: no-repeat;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px; 
 }
 
 .character-list {
+  width: auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr); 
   gap: 20px;
-  max-width: 100%;
-  margin-bottom: 200px;  /* Костыль на скролл */
+  margin-bottom: 300px;   /* Костыль на скролл */
+  margin: 30px;
+
 }
 
 .character-card {
   border: 1px solid #ccc;
-  padding: 10px;
-  width: 200px;
+  height: 220px;
+  width: 250px;
+  text-decoration: none; 
+  color: inherit; 
+  border-radius: 2%;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); /* Добавляем тень снизу */
+}
+
+.character-info {
+  margin-left: 10px; 
+  margin-top: 20px;
 }
 
 .character-image {
   width: 100%;
+  height: 66%;
+  border-radius: 2% 2% 0 0;
+  margin-bottom: 0px; 
 }
 
+.character-info b {
+  font-size: 1.05em;
+  color: #181818;
+ /*  margin-top: 15px; */
+
+}
+.character-info p {
+  font-size: 0.85em;
+  color: #474747;
+  margin-top: 0px;
+
+}

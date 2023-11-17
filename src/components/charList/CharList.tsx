@@ -125,7 +125,10 @@ const CharList: React.FC = () => {
 
   return (
     <div className="character-grid" ref={charListRef} >
-       <img src={logo} alt="kek" style={{width: "600px", height: "130px"}}/>
+       <img src={logo} alt="logo" className='mainlogo'/>
+      
+       
+      <div className="characters-container">
       <div className="search-bar">
         <input
           type="text"
@@ -134,35 +137,34 @@ const CharList: React.FC = () => {
           onChange={setHeroAndLocal}
         />
         </div>
-       
-      <div className="character-list" >
-            {!isDataLoaded && <p>Loading...</p>}
-            {isDataLoaded && (searchHero ? (
-              filterCharacters.length === 0 ? <p>No matching characters</p> : (
-                filterCharacters.map(character => (
+        <div className="character-list" >
+              {!isDataLoaded && <p>Loading...</p>}
+              {isDataLoaded && (searchHero ? (
+                filterCharacters.length === 0 ? <p>No matching characters</p> : (
+                  filterCharacters.map(character => (
+                    <Link key={character.id} to={`/character/${character.id}`} className="character-card">
+                      <img src={character.image} alt={character.name} className="character-image" />
+                        <div className="character-info">
+                            <b>{character.name}</b>
+                            <p>{character.species}</p>
+                        </div>
+                    </Link>
+                  ))
+                )
+              ) : (
+                characters.map(character => (
                   <Link key={character.id} to={`/character/${character.id}`} className="character-card">
                     <img src={character.image} alt={character.name} className="character-image" />
-                      <div className="character-info">
+                    <div className="character-info">
                           <b>{character.name}</b>
                           <p>{character.species}</p>
                       </div>
                   </Link>
                 ))
-              )
-            ) : (
-              characters.map(character => (
-                <Link key={character.id} to={`/character/${character.id}`} className="character-card">
-                  <img src={character.image} alt={character.name} className="character-image" />
-                  <div className="character-info">
-                        <b>{character.name}</b>
-                        <p>{character.species}</p>
-                    </div>
-                </Link>
-              ))
-            ))}
+              ))}
+        </div>
       </div>
       {loading && <p className='loadBar'>Loading...</p>}
-      
     </div>
   );
 };

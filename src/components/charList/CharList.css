@@ -1,15 +1,35 @@
 .character-grid {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  
+  margin-bottom: 150px;   /* Костыль на скролл */
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.mainlogo {
+  width: 100%;
+  height: 100%;
+  max-width: 630px;
+  max-height: 130px;
 }
 
 .search-bar {
-  margin: 50px;
   margin-bottom: 20px; 
-  width: 800px;
- 
+  margin-top: 30px;
+  width: 100%;
+  display: flex;
+  max-width: 80%;
+}
+
+
+
+.characters-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; 
+  justify-content: space-evenly;
+  
 }
 
 .search-bar input[type="text"] {
@@ -34,15 +54,14 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr); 
   gap: 20px;
-  margin-bottom: 300px;   /* Костыль на скролл */
-  margin: 30px;
-
 }
 
 .character-card {
   border: 1px solid #ccc;
-  height: 220px;
-  width: 250px;
+  height: 100%;
+  width: 100%;
+  max-width: 300px;
+  max-height: 250px;
   text-decoration: none; 
   color: inherit; 
   border-radius: 2%;
@@ -52,6 +71,10 @@
 .character-info {
   margin-left: 10px; 
   margin-top: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
 }
 
 .character-image {
@@ -62,14 +85,17 @@
 }
 
 .character-info b {
-  font-size: 1.05em;
+  /* font-size: 1.03em; */
+  font-size: calc(0.5em + 0.5vw);
   color: #181818;
- /*  margin-top: 15px; */
+ 
 
 }
 .character-info p {
-  font-size: 0.85em;
+  /* font-size: 0.87em; */
+  font-size: calc(0.1em + 0.2vw);
+  font-size: 1rem;
   color: #474747;
-  margin-top: 0px;
+  margin-top: 4px;
 
 }

@@ -1,0 +1,42 @@
+.mainComponent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.buttonBack {
+    display: block;
+    text-decoration: none;
+    color: rgb(43, 39, 39);
+    font-weight: bold;
+}
+
+.userBar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;  
+}
+
+.userBar img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.userBar span {
+    margin-right: 10px;
+}
+
+.authButton {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+@media screen and (max-width: 767px) {
+    .userBar {
+      display: none; /* Скрываем на мобильных устройствах */
+    }
+  }

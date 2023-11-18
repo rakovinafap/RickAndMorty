@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getAuth, onAuthStateChanged, signInWithPopup, signOut, GoogleAuthProvider } from 'firebase/auth';
 import { initializeApp } from "firebase/app";
 import { Link, useLocation } from 'react-router-dom';
+import './firebase.css';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDCrwvufMxQz57HJfZS3JR7KR7bWtbO9qo",
@@ -45,12 +46,12 @@ const AuthProvider = () => {
     const location = useLocation();
 
     return (
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px' }}>
+            <div className='mainComponent'>
 
                 {location.pathname.includes('character') ? (
                         <div>
-                        <Link to="/" style={{ display: 'block', textDecoration: 'none' }}>
-                            Go Back
+                        <Link className='buttonBack' to="/">
+                        <span>⇦</span> GO BACK
                         </Link>
                         </div>
                     ): (
@@ -58,19 +59,18 @@ const AuthProvider = () => {
                     )}
 
                 {user ? (
-                <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+                <div className='userBar'>
                     {user.photoURL && (
                     <img
                         src={user.photoURL}
                         alt="User Profile"
-                        style={{ width: '50px', height: '50px', borderRadius: '50%', marginRight: '10px' }}
                     />
                     )}
-                    <span style={{ marginRight: '10px' }}>{user.displayName}</span>
+                    <span>{user.displayName}</span>
                     <button onClick={handleSignOut}>Sign Out</button>
                 </div>
                 ) : (
-                <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+                <div className='authButton'>
                     <button onClick={handleSignIn}>Sign In with Google</button>
                 </div>
                 )}

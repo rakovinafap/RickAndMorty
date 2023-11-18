@@ -48,21 +48,23 @@ const CharInfo: React.FC = () => {
   }
 
   return (
-    <div>
+    <div className='main-container'>
       <div className="aboutchar">
-          <img src={character.image} alt={character.name} />
-          <h2>{character.name}</h2>
-          <h4>Informations</h4>
-          <p>Gender: {character.gender}</p>
-          <hr/>
-          <p>Status: {character.status}</p>
-          <hr/>
-          <p>Specie: {character.species}</p>
-          <hr/>
-          <p>Origin: {character.origin}</p>
-          <hr/>
-          <p>Type: {character.type}</p>
-          <hr/>
+        <img src={character.image} alt={character.name} />
+        <h2>{character.name}</h2>
+        <div className='info'>
+          <span>Informations</span>
+        </div>
+        <p><strong>Gender</strong><br/> <span>{character.gender}</span></p>
+        <hr/>
+        <p><strong>Status</strong><br/> <span>{character.status}</span></p>
+        <hr/>
+        <p><strong>Specie</strong><br/> <span>{character.species}</span></p>
+        <hr/>
+        <p><strong>Origin</strong><br/> <span>{character.origin}</span></p>
+        <hr/>
+        <p><strong>Type</strong><br/> <span>{character.type}</span></p>
+        <hr/>
       </div>
     </div>
   );

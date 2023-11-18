@@ -2,27 +2,67 @@
     text-align: center;
     max-width: 400px;
     margin: 0 auto;
-    padding: 20px;
   }
   
   .aboutchar img {
     border-radius: 50%;
+    box-shadow: 0 0 0 3px rgba(92, 91, 91, 0.2); 
     width: 250px;
     height: 250px;
     object-fit: cover;
-    margin-bottom: 20px;
-  }
-  
-  .aboutchar h2 {
     margin-bottom: 10px;
   }
   
-  .aboutchar h4 {
-    margin-bottom: 50px;
+  .aboutchar h2 {
+    margin-bottom: 30px;
   }
   
   .aboutchar hr {
+    border: none; 
+    height: 1px; 
+    background-color: #dfdbdb; 
+    margin: 10px 0; 
     margin-bottom: 20px;
   }
   
-  
+  .aboutchar p {
+    text-align: left;
+    font-size: 0.8em;
+  }
+
+  .info {
+    margin-bottom: 40px;
+  }
+ 
+  @media screen and (max-width: 767px) {
+    .main-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80vh; 
+      margin: 0px;
+    }
+
+    .aboutchar p {
+      text-align: left;
+      font-size: 0.6em;
+    }
+
+    .aboutchar img {
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px rgba(92, 91, 91, 0.2); 
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    .aboutchar h2 {
+      margin-bottom: 10px;
+    }
+
+    .info {
+      margin-bottom: 40px;
+    }
+   
+  }

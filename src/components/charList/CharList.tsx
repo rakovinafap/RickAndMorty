@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef, StrictMode } from 'react';
 import { Link } from 'react-router-dom';
 import './CharList.css';
-import logo from '../../assets/img/logo.png'; 
+import logo from '../../assets/img/logo.png';
+import loadPortal from '../../assets/gif/2.gif';
 
 interface Character {
   id: number;
@@ -126,8 +127,6 @@ const CharList: React.FC = () => {
   return (
     <div className="character-grid" ref={charListRef} >
        <img src={logo} alt="logo" className='mainlogo'/>
-      
-       
       <div className="characters-container">
       <div className="search-bar">
         <input
@@ -137,8 +136,8 @@ const CharList: React.FC = () => {
           onChange={setHeroAndLocal}
         />
         </div>
+        {!isDataLoaded && <div className='portal'><img src={loadPortal}/></div>}
         <div className="character-list" >
-              {!isDataLoaded && <p>Loading...</p>}
               {isDataLoaded && (searchHero ? (
                 filterCharacters.length === 0 ? <p>No matching characters</p> : (
                   filterCharacters.map(character => (
@@ -164,7 +163,7 @@ const CharList: React.FC = () => {
               ))}
         </div>
       </div>
-      {loading && <p className='loadBar'>Loading...</p>}
+       {loading && <div className='portal'><img src={loadPortal}/></div>} 
     </div>
   );
 };

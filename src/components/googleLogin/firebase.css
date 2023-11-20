@@ -3,6 +3,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px;
+    width: auto;
 }
 
 .buttonBack {
@@ -39,4 +40,7 @@
     .userBar {
       display: none; /* Скрываем на мобильных устройствах */
     }
+    /* .mainComponent {
+        width: 10px;
+    } */
   }

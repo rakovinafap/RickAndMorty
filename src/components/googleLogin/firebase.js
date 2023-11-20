@@ -51,7 +51,7 @@ const AuthProvider = () => {
                 {location.pathname.includes('character') ? (
                         <div>
                         <Link className='buttonBack' to="/">
-                        <span>⇦</span> GO BACK
+                        <span>⇦ GO BACK</span> 
                         </Link>
                         </div>
                     ): (
